@@ -42,10 +42,10 @@ export const additionalProducts: Product[] = [
   },
 ]
 
-export const getAllProducts = (): Product[] => {
-  return [...initialProducts, ...additionalProducts]
-}
+// export const getAllProducts = (): Product[] => {
+//   return [...initialProducts, ...additionalProducts]
+// }
 
-export const getProductById = (id: number): Product | undefined => {
-  return getAllProducts().find((product) => product.id === id)
-}
+// export const getProductById = (id: number): Product | undefined => {
+//   return getAllProducts().find((product) => product.id === id)
+// }

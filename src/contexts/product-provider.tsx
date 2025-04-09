@@ -10,13 +10,23 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     useState<Product[]>(initialProducts)
   const [hasMoreProducts, setHasMoreProducts] = useState<boolean>(true)
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const [cart, setCart] = useState<CartItem[]>(
-    JSON.parse(localStorage.getItem('cart') as string)
-  )
+
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
+    const storedCart = localStorage.getItem('cart')
+    if (storedCart) {
+      setCart(JSON.parse(storedCart))
+    }
+    setIsHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem('cart', JSON.stringify(cart))
+    }
+  }, [cart, isHydrated])
 
   const loadMoreProducts = () => {
     setDisplayedProducts((prev) => [...prev, ...additionalProducts])
@@ -25,7 +35,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 
   const searchProducts = (query: string) => {
     setSearchQuery(query)
-    
+
     if (!query.trim()) {
       setDisplayedProducts(initialProducts)
       setHasMoreProducts(true)

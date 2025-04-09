@@ -3,6 +3,7 @@
 import { ProductCard } from '../product-card/product-card'
 import { useProductContext } from '@/contexts/product-context'
 import styles from './product-list.module.css'
+import { Button } from '../ui/button/button'
 
 export const ProductList = () => {
   const { products, loadMoreProducts, hasMoreProducts } = useProductContext()
@@ -10,7 +11,7 @@ export const ProductList = () => {
   return (
     <>
       {products.length === 0 ? (
-        <div className={styles.noProducts}>No products</div>
+        <div className={styles.noProducts}>Нет продуктов</div>
       ) : (
         <div className={styles.productList}>
           {products.map((product) => (
@@ -22,9 +23,7 @@ export const ProductList = () => {
       )}
 
       {hasMoreProducts && (
-        <button className={styles.loadMoreButton} onClick={loadMoreProducts}>
-          Show More
-        </button>
+        <Button onClick={loadMoreProducts}>Показать еще</Button>
       )}
     </>
   )

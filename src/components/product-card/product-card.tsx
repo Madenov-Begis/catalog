@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Product } from '@/types'
 import { useProductContext } from '@/contexts/product-context'
 import styles from './product-card.module.css'
+import { Button } from '../ui/button/button'
 
 interface ProductCardProps {
   product: Product
@@ -27,16 +28,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={product.image}
             alt={product.name}
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain' }}
             sizes="(max-width: 768px) 100vw, 300px"
           />
         </div>
         <div className={styles.cardContent}>
           <h2 className={styles.productName}>{product.name}</h2>
           <p className={styles.productPrice}>${product.price}</p>
-          <button className={styles.addToCartButton} onClick={handleAddToCart}>
-            Add to Cart
-          </button>
+          <Button onClick={handleAddToCart}>Добавить в корзину</Button>
         </div>
       </div>
     </Link>

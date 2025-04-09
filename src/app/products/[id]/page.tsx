@@ -60,7 +60,7 @@ function ProductDetailContent() {
             src={isImageError ? '' : product.image}
             alt={product.name}
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain' }}
             onError={() => setIsImageError(true)}
             sizes="(max-width: 768px) 100vw, 50vw"
           />

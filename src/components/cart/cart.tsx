@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useProductContext } from '@/contexts/product-context'
 import styles from './cart.module.css'
+import { Button } from '../ui/button/button'
 
 export const Cart = () => {
   const { cart, addToCart, removeFromCart, clearCart } = useProductContext()
@@ -13,14 +14,14 @@ export const Cart = () => {
     setIsOpen(!isOpen)
   }
 
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
-  const totalPrice = cart.reduce(
+  const totalItems = cart?.reduce((total, item) => total + item.quantity, 0)
+  const totalPrice = cart?.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0
   )
 
   const handleCheckout = () => {
-    alert('Success!')
+    alert('Успешно!')
     clearCart()
     setIsOpen(false)
   }
@@ -39,13 +40,13 @@ export const Cart = () => {
           !isOpen ? styles.cartDropdownHidden : ''
         }`}
       >
-        <h3>Your Cart</h3>
+        <h3>Корзина</h3>
 
-        {cart.length === 0 ? (
-          <p className={styles.emptyCart}>Your cart is empty</p>
+        {cart?.length === 0 ? (
+          <p className={styles.emptyCart}>Ваша корзина пуста</p>
         ) : (
           <>
-            {cart.map((item) => (
+            {cart?.map((item) => (
               <div className={styles.cartItem} key={item.product.id}>
                 <div className={styles.itemImage}>
                   <Image
@@ -79,13 +80,11 @@ export const Cart = () => {
             ))}
 
             <div className={styles.cartTotal}>
-              <span>Total:</span>
-              <span>${totalPrice.toFixed(2)}</span>
+              <span>Итого:</span>
+              <span>${totalPrice?.toFixed(2)}</span>
             </div>
 
-            <button className={styles.checkoutButton} onClick={handleCheckout}>
-              Checkout
-            </button>
+            <Button onClick={handleCheckout}>Заказать</Button>
           </>
         )}
       </div>
