@@ -8,6 +8,7 @@ import { Product } from '@/types'
 import { useProductContext } from '@/contexts/product-context'
 import { ProductProvider } from '@/contexts/product-provider'
 import styles from './page.module.css'
+import { Button } from '@/components/ui/button/button'
 
 function ProductDetailContent() {
   const params = useParams()
@@ -35,6 +36,7 @@ function ProductDetailContent() {
   }
 
   const handleAddToCart = () => {
+    
     if (product) {
       addToCart(product)
     }
@@ -70,9 +72,9 @@ function ProductDetailContent() {
           <h1 className={styles.productName}>{product.name}</h1>
           <p className={styles.productPrice}>${product.price}</p>
           <p className={styles.productDescription}>{product.description}</p>
-          <button className={styles.addToCartButton} onClick={handleAddToCart}>
-            Add to Cart
-          </button>
+          <Button className={styles.addToCartButton} onClick={handleAddToCart}>
+            Добавит в корзину
+          </Button>
         </div>
       </div>
     </div>

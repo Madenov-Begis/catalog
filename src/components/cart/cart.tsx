@@ -5,10 +5,15 @@ import Image from 'next/image'
 import { useProductContext } from '@/contexts/product-context'
 import styles from './cart.module.css'
 import { Button } from '../ui/button/button'
+import { useClientOutside } from '@/hooks/use-click-outside'
 
 export const Cart = () => {
   const { cart, addToCart, removeFromCart, clearCart } = useProductContext()
   const [isOpen, setIsOpen] = useState(false)
+
+  const ref = useClientOutside<HTMLDivElement>(() => {
+    setIsOpen(false)
+  })
 
   const toggleCart = () => {
     setIsOpen(!isOpen)
@@ -28,7 +33,7 @@ export const Cart = () => {
 
   return (
     <div className={styles.cartContainer}>
-      <div className={styles.cartIcon} onClick={toggleCart}>
+      <div className={styles.cartIcon} onClick={toggleCart} ref={ref}>
         🛒
         {totalItems > 0 && (
           <span className={styles.cartBadge}>{totalItems}</span>

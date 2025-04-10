@@ -3,8 +3,11 @@
 }
 
 .cartIcon {
+  padding: 8px;
   cursor: pointer;
   position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .cartBadge {
