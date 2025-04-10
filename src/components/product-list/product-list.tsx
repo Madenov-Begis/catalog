@@ -23,7 +23,7 @@ export const ProductList = () => {
       )}
 
       {hasMoreProducts && (
-        <Button onClick={loadMoreProducts}>Показать еще</Button>
+        <Button onClick={loadMoreProducts} style={{width: 300, margin: '30px auto', display: 'block'}}>Показать еще</Button>
       )}
     </>
   )
